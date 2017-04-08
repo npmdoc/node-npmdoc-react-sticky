@@ -1,0 +1,291 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/captivationsoftware/react-sticky">react-sticky (v5.0.5)</a>
+</h1>
+<h4>Sticky component for React</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.react-sticky">module react-sticky</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.react-sticky.Channel">
+            function <span class="apidocSignatureSpan">react-sticky.</span>Channel
+            <span class="apidocSignatureSpan">(data)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.react-sticky.Sticky">
+            function <span class="apidocSignatureSpan">react-sticky.</span>Sticky
+            <span class="apidocSignatureSpan">(props)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.react-sticky.StickyContainer">
+            function <span class="apidocSignatureSpan">react-sticky.</span>StickyContainer
+            <span class="apidocSignatureSpan">(props)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.react-sticky.default">
+            function <span class="apidocSignatureSpan">react-sticky.</span>default
+            <span class="apidocSignatureSpan">(props)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.react-sticky" id="apidoc.module.react-sticky">module react-sticky</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.react-sticky.Channel" id="apidoc.element.react-sticky.Channel">
+        function <span class="apidocSignatureSpan">react-sticky.</span>Channel
+        <span class="apidocSignatureSpan">(data)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Channel(data) {
+  _classCallCheck(this, Channel);
+
+  var listeners = [];
+  data = data || {};
+
+  this.subscribe = function (fn) {
+    listeners.push(fn);
+  };
+
+  this.unsubscribe = function (fn) {
+    var idx = listeners.indexOf(fn);
+    if (idx !== -1) listeners.splice(idx, 1);
+  };
+
+  this.update = function (fn) {
+    if (fn) fn(data);
+    listeners.forEach(function (l) {
+      return l(data);
+    });
+  };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.react-sticky.Sticky" id="apidoc.element.react-sticky.Sticky">
+        function <span class="apidocSignatureSpan">react-sticky.</span>Sticky
+        <span class="apidocSignatureSpan">(props)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Sticky(props) {
+  _classCallCheck(this, Sticky);
+
+  var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Sticky).call(this, props));
+
+  _this.updateContext = function (_ref) {
+    var inherited = _ref.inherited;
+    var node = _ref.node;
+
+    _this.containerNode = node;
+    _this.setState({
+      containerOffset: inherited,
+      distanceFromBottom: _this.getDistanceFromBottom()
+    });
+  };
+
+  _this.recomputeState = function () {
+    var isSticky = _this.isSticky();
+    var height = _this.getHeight();
+    var width = _this.getWidth();
+    var xOffset = _this.getXOffset();
+    var distanceFromBottom = _this.getDistanceFromBottom();
+    var hasChanged = _this.state.isSticky !== isSticky;
+
+    _this.setState({ isSticky: isSticky, height: height, width: width, xOffset: xOffset, distanceFromBottom: distanceFromBottom });
+
+    if (hasChanged) {
+      if (_this.channel) {
+        _this.channel.update(function (data) {
+          data.offset = isSticky ? _this.state.height : 0;
+        });
+      }
+
+      _this.props.onStickyStateChange(isSticky);
+    }
+  };
+
+  _this.state = {};
+  return _this;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.react-sticky.StickyContainer" id="apidoc.element.react-sticky.StickyContainer">
+        function <span class="apidocSignatureSpan">react-sticky.</span>StickyContainer
+        <span class="apidocSignatureSpan">(props)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Container(props) {
+  _classCallCheck(this, Container);
+
+  var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Container).call(this, props));
+
+  _this.updateOffset = function (_ref) {
+    var inherited = _ref.inherited;
+    var offset = _ref.offset;
+
+    _this.channel.update(function (data) {
+      data.inherited = inherited + offset;
+    });
+  };
+
+  _this.channel = new _channel2.default({ inherited: 0, offset: 0, node: null });
+  return _this;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.react-sticky.default" id="apidoc.element.react-sticky.default">
+        function <span class="apidocSignatureSpan">react-sticky.</span>default
+        <span class="apidocSignatureSpan">(props)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Sticky(props) {
+  _classCallCheck(this, Sticky);
+
+  var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Sticky).call(this, props));
+
+  _this.updateContext = function (_ref) {
+    var inherited = _ref.inherited;
+    var node = _ref.node;
+
+    _this.containerNode = node;
+    _this.setState({
+      containerOffset: inherited,
+      distanceFromBottom: _this.getDistanceFromBottom()
+    });
+  };
+
+  _this.recomputeState = function () {
+    var isSticky = _this.isSticky();
+    var height = _this.getHeight();
+    var width = _this.getWidth();
+    var xOffset = _this.getXOffset();
+    var distanceFromBottom = _this.getDistanceFromBottom();
+    var hasChanged = _this.state.isSticky !== isSticky;
+
+    _this.setState({ isSticky: isSticky, height: height, width: width, xOffset: xOffset, distanceFromBottom: distanceFromBottom });
+
+    if (hasChanged) {
+      if (_this.channel) {
+        _this.channel.update(function (data) {
+          data.offset = isSticky ? _this.state.height : 0;
+        });
+      }
+
+      _this.props.onStickyStateChange(isSticky);
+    }
+  };
+
+  _this.state = {};
+  return _this;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    var offset = _ref.offset;
+
+    _this.channel.update(function (data) {
+      data.inherited = inherited + offset;
+    });
+  };
+
+  _this.channel = new _channel2.<span class="apidocCodeKeywordSpan">default</span>({ inherited: 0, offset: 0, node: null });
+  return _this;
+}
+
+_createClass(Container, [{
+  key: 'getChildContext',
+  value: function getChildContext() {
+    return { 'sticky-channel': this.channel };
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
