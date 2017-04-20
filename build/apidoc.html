@@ -51,7 +51,7 @@
 
         href="https://github.com/captivationsoftware/react-sticky"
 
-    >react-sticky (v5.0.5)</a>
+    >react-sticky (v5.0.8)</a>
 </h1>
 <h4>Sticky component for React</h4>
 <div class="apidocSectionDiv"><a
@@ -149,11 +149,11 @@
     <li>description and source-code<pre class="apidocCodePre">function Sticky(props) {
   _classCallCheck(this, Sticky);
 
-  var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Sticky).call(this, props));
+  var _this = _possibleConstructorReturn(this, (Sticky.__proto__ || Object.getPrototypeOf(Sticky)).call(this, props));
 
   _this.updateContext = function (_ref) {
-    var inherited = _ref.inherited;
-    var node = _ref.node;
+    var inherited = _ref.inherited,
+        node = _ref.node;
 
     _this.containerNode = node;
     _this.setState({
@@ -201,11 +201,11 @@
     <li>description and source-code<pre class="apidocCodePre">function Container(props) {
   _classCallCheck(this, Container);
 
-  var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Container).call(this, props));
+  var _this = _possibleConstructorReturn(this, (Container.__proto__ || Object.getPrototypeOf(Container)).call(this, props));
 
   _this.updateOffset = function (_ref) {
-    var inherited = _ref.inherited;
-    var offset = _ref.offset;
+    var inherited = _ref.inherited,
+        offset = _ref.offset;
 
     _this.channel.update(function (data) {
       data.inherited = inherited + offset;
@@ -230,11 +230,11 @@
     <li>description and source-code<pre class="apidocCodePre">function Sticky(props) {
   _classCallCheck(this, Sticky);
 
-  var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Sticky).call(this, props));
+  var _this = _possibleConstructorReturn(this, (Sticky.__proto__ || Object.getPrototypeOf(Sticky)).call(this, props));
 
   _this.updateContext = function (_ref) {
-    var inherited = _ref.inherited;
-    var node = _ref.node;
+    var inherited = _ref.inherited,
+        node = _ref.node;
 
     _this.containerNode = node;
     _this.setState({
@@ -268,7 +268,7 @@
   return _this;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-    var offset = _ref.offset;
+        offset = _ref.offset;
 
     _this.channel.update(function (data) {
       data.inherited = inherited + offset;
